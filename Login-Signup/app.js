@@ -24,6 +24,9 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/login.html');
 });
 
+app.get('/signup', (req, res) => {
+    res.sendFile(__dirname + '/signup.html');
+});
 // Sign-up route
 app.post('/signup', (req, res) => {
     const { Fname,Lname, DOB, Telephone, email, password} = req.body;
@@ -77,7 +80,7 @@ app.post('/login', (req, res) => {
 
             // Create session for the user
             req.session.userId = user.id;
-            res.send('Login successful');
+            res.sendFile(__dirname + '/Home.html');
         });
     });
 });
