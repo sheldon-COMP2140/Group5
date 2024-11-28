@@ -24,6 +24,18 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/login.html');
 });
 
+app.get('/MainpageCUS', (req, res) => {
+    res.sendFile(__dirname + '/MainpageCUS.html');
+});
+
+app.get('/MainpageOWN', (req, res) => {
+    res.sendFile(__dirname + '/MainpageOWN.html');
+});
+
+app.get('/MainpageEMP', (req, res) => {
+    res.sendFile(__dirname + '/MainpageEMP.html');
+});
+
 app.get('/signup', (req, res) => {
     res.sendFile(__dirname + '/signup.html');
 });
@@ -32,7 +44,7 @@ app.post('/signup', (req, res) => {
     const { Fname,Lname, DOB, Telephone, email, password} = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    // Check if the Fname already exists
+    // Check if the email already exists
     db.query('SELECT * FROM eagleaccount WHERE email = ?', [email], (err, result) => {
         if (err) {
             console.log(err);
@@ -43,14 +55,17 @@ app.post('/signup', (req, res) => {
         }
 
         // Insert new user into the database
-        db.query('INSERT INTO eagleaccount (Fname, Lname , DOB, Telephone, email, Password) VALUES (?, ?, ?, ?, ?, ?)', [Fname, Lname, DOB, Telephone, email, hashedPassword], (err, result) => {
+        db.query('INSERT INTO eagleaccount (Fname, Lname , DOB, Telephone, email, Password, IsAdmin, IsOwner) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [Fname, Lname, DOB, Telephone, email, hashedPassword, null, null], (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).send('Server error');
             }
-            res.send('User created successfully');
+            res.send('User created successfully'); //need code to navigate back to login page
+            
         });
-    });
+
+      });
+      
 });
 
 // Login route
@@ -80,13 +95,18 @@ app.post('/login', (req, res) => {
 
             // Create session for the user
             req.session.userId = user.id;
-            res.sendFile(__dirname + '/Home.html');
+            if(user.IsOwner != null )
+                res.sendFile(__dirname + '/MainpageOWN.html');
+            else if(user.IsAdmin != null)
+                res.sendFile(__dirname + '/MainpageEMP.html');
+            else
+            res.sendFile(__dirname + '/MainpageCUS.html');
         });
     });
 });
 
 // Logout route
-app.get('/logout', (req, res) => {
+app.get('/logout', (req, res) => {e
     req.session.destroy(() => {
         res.send('Logged out successfully');
     });
@@ -95,4 +115,3 @@ app.get('/logout', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
-
