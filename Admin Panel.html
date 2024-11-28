@@ -1,0 +1,48 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="inventory-management">
+    <h2>Manage Inventory</h2>
+    <table id="inventory-table">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Inventory items will be dynamically loaded here -->
+      </tbody>
+    </table>
+    <button onclick="openAddItemForm()">Add Item</button>
+
+    <!-- Add/Edit Item Form -->
+    <div id="add-item-form" style="display:none;">
+      <h3>Add/Edit Item</h3>
+      <input type="hidden" id="item-id"> <!-- Hidden field for item ID -->
+      <label for="item-name">Item Name</label>
+      <input type="text" id="item-name" required>
+      <label for="item-description">Description</label>
+      <textarea id="item-description"></textarea>
+      <label for="item-price">Price</label>
+      <input type="number" id="item-price" required>
+      <label for="item-quantity">Quantity</label>
+      <input type="number" id="item-quantity" required>
+      <button onclick="saveItem()">Save</button>
+      <button onclick="cancelAddItem()">Cancel</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
