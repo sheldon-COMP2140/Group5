@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"> 
+    <head>
+        <link rel="stylesheet" href="../css/Style.css">
+        <script src="../JS/generatequote.js"></script>
+        <title>Eagle Software Quotation Generation</title>
+        <h1>Eagle Software Quote Generation</h1>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h2>Please the following information inorder to generate price.</h1>
+        
+            <form id="myForm">
+                <!-- action="generate_quote.php" method="post" -->
+                <p>Please select the type of windows.</p>
+                <div class="flex-container">
+                    <div>
+                        <input type="radio" id="CarWindow" name="Type of Window" value="Car" required>
+                        <label id="font" for="Car">Car</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="BuildingWindow" name="Type of Window" value="Building" required>
+                        <label id="font" for="Building">Building</label>
+                    </div>
+                </div>
+                <div>
+                    <label id="font" for="length">Length of the Window to be tinted in inches:</label><br>
+                    <input type="number" id="length" name="length" placeholder="100" size="50px" required>
+                </div>
+                <div>
+                    <label id="font" for="width">Width of the Window to be tinted in inches:</label><br>
+                    <input type="number" id="width" name="width" placeholder="100" size="50px" required>
+                </div>
+
+                <p>Please select the Colour of the tint:</p>
+                <div class="flex-container">
+                    <div>
+                        <input type="radio" id="Frosted" name="Type" value="Frosted" required>
+                        <label id="font" for="Frosted">Frosted</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="Titanium" name="Type" value="Titanium" required>
+                        <label id="font" for="Titanium">Titanium</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="Midnight" name="Type" value="Midnight" required>
+                        <label id="font" for="Midnight">Midnight</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="Medium" name="Type" value="Medium" required>
+                        <label id="font" for="Medium">Medium</label>
+                    </div>
+                </div>
+                
+                <!-- <div>
+                    <p>Please select the Grade of the tint:</p>
+                    <div>
+                        <input type="radio" id="5%" name="Grade" value="5%">
+                        <label for="5%">5%</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="10%" name="Grade" value="10%">
+                        <label for="10%">10%</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="15%" name="Grade" value="15%">
+                        <label for="15%">15%</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="20%" name="Grade" value="20%">
+                        <label for="20%">20%</label>
+                    </div>
+                </div> -->
+                
+                <input  class="form-submit-button" type="submit" value="Submit">   
+                            <!--  id='submit'-->
+            </form>
+            <br>
+            <div>
+                <p id="update"></p>
+            </div>
+            <br>
+        <div class="flex-container" >
+            <button class="i" id="i">Back to main page</button>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,122 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    height: 200px;
+    width: 100%;
+    }
+
+    .newflex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+        height: 200px;
+        width: 100%;
+        padding: 10%;
+        }
+
+    #a{
+        background-color: red;
+        height: 110px;
+        width: 300px;
+        /* background-color: ; */
+        /* size: 300%; */
+    }
+
+    #b{
+        background-color: blue;
+        height: 110px;
+        width: 300px;
+    }
+
+    #c{
+        background-color: blueviolet;
+        height: 110px;
+        width: 300px;
+    }
+
+    #d{
+        background-color: yellow;
+        height: 110px;
+        width: 300px;
+    }
+
+    #e{
+        background-color: green;
+        height: 110px;
+        width: 300px;
+    }
+
+    #f{
+        background-color: orange;
+        height: 110px;
+        width: 300px;
+    }
+
+    #g{
+        background-color: indigo;
+        height: 110px;
+        width: 300px;
+    }
+
+    #h{
+        background-color: red;
+        height: 110px;
+        width: 300px;
+    }
+
+    #i{
+        background-color: #000000;
+        height: 110px;
+        width: 300px;
+        color: #ffffff;
+    }
+
+    #mainbodycus{
+        background-color: #73FBFD;
+        padding: 20% 10% 20% 10%;
+    }
+
+    #mainbodyOWN{
+        background-color: #F08784;
+        padding: 20% 10% 20% 10%;
+    }
+
+    #mainbodyEMP{
+        background-color: #FFFE91;
+        padding: 20% 10% 20% 10%;
+    }
+
+    #mainbodyQUOTE{
+        background-color: #7E84F7;
+        padding: 20% 10% 20% 10%;
+    }
+
+    h1{
+        /* align-self: center; */
+        text-align: center;
+    }
+
+    h2{
+        align-self: center;
+    }
+    p{
+        align-self: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-template-rows: 150px 150px;
+        grid-gap: 20px;
+        }
+    
+    .newgrid-container {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+        grid-gap: 80px;
+        }
