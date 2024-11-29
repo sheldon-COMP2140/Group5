@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .total-revenue { margin-top: 20px; font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Generate Financial Report</h1>
+    <form id="reportForm">
+        <label for="month">Month (1-12):</label>
+        <input type="number" id="month" name="month" min="1" max="12" required>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" min="2000" max="2100" required>
+        <button type="button" onclick="generateReport()">Generate Report</button>
+    </form>
+
+    <div id="reportOutput"></div>
+
+    <script>
+        async function generateReport() {
+            const month = document.getElementById('month').value;
+            const year = document.getElementById('year').value;
+
+            if (!month || !year) {
+                alert('Please enter a valid month and year.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/generate_report.php', {
+    		method: 'POST',
+    		headers: { 'Content-Type': 'application/json' },
+    		body: JSON.stringify({ month: parseInt(month), year: parseInt(year) })
+		});
+
+                const result = await response.json();
+                displayReport(result);
+            } catch (error) {
+                document.getElementById('reportOutput').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+
+        function displayReport(result) {
+            const { ReportMonthYear, TotalRevenue, Reservations } = result;
+            let html = `<h2>Financial Report for ${ReportMonthYear}</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Transaction ID</th>
+                                    <th>Service Cost</th>
+                                    <th>Reservation ID</th>
+                                    <th>Reservation Date</th>
+                                    <th>Reservation Time</th>
+                                </tr>
+                            </thead><tbody>`;
+
+            Reservations.forEach(reservation => {
+                html += `<tr>
+                            <td>${reservation.UserID}</td>
+                            <td>${reservation.TransactionID}</td>
+                            <td>${reservation.ServiceCost.toFixed(2)}</td>
+                            <td>${reservation.ResID}</td>
+                            <td>${new Date(reservation.ResDate).toLocaleDateString()}</td>
+                            <td>${reservation.ResTime}</td>
+                        </tr>`;
+            });
+
+            html += `</tbody></table>
+                     <div class="total-revenue">Total Revenue: $${TotalRevenue.toFixed(2)}</div>`;
+
+            document.getElementById('reportOutput').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
