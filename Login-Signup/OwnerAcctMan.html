@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Account Lookup</title>
+      <style> body { font-family: Arial, sans-serif; margin: 40px; } .container 
+      { max-width: 400px; margin: 0 auto; text-align: center; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; } 
+      input[type="text"] { width: 80%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; } button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; } button:hover { background-color: #45a049; }
+        
+      #result { margin-top: 20px; font-size: 18px; font-weight: bold; } 
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <h2>Account Lookup</h2>
+         <p>Enter user email to lookup account:</p>
+         <form action="/lookup" method="POST">
+            <input type="text" name="lookupInput1" id="lookupInput" placeholder="Enter value"> <br> 
+            <button type="submit" onclick="lookupValue()">Lookup</button> 
+         </form>
+         <div id="result"></div>
+      </div>
+      
+      <script> function lookupValue() { 
+        
+        var input = document.getElementById('lookupInput').value; 
+        var resultDiv = document.getElementById('result'); 
+        
+        // if(input) { 
+        //     resultDiv.textContent = "You entered: " + input; 
+        // } 
+        // else {
+        //      resultDiv.textContent = "Please enter a value to look up."; 
+        //      } 
+        } </script> 
+
+   </body>
+</html>
