@@ -1,6 +1,0 @@
-update eagle.eagleaccount
- set IsAdmin = 1
--- set IsOwner =null
-where email = 'atrail@yahoo.com'
---  Set current privileges to null
--- then apply desired privileges
