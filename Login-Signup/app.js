@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const db = require('./db');  // Import the MySQL connection
+const cheerio  = require('cheerio');
+
 
 const app = express();
 const port = 3000;
@@ -22,6 +24,10 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/login.html');
+});
+
+app.get('/OwnerAcctMan', (req, res) => {
+    res.sendFile(__dirname + '/OwnerAcctMan.html');
 });
 
 app.get('/MainpageCUS', (req, res) => {
@@ -55,7 +61,7 @@ app.post('/signup', (req, res) => {
         }
 
         // Insert new user into the database
-        db.query('INSERT INTO eagleaccount (Fname, Lname , DOB, Telephone, email, Password, IsAdmin, IsOwner) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [Fname, Lname, DOB, Telephone, email, hashedPassword, null, null], (err, result) => {
+        db.query('INSERT INTO eagle.eagleaccount (Fname, Lname , DOB, Telephone, email, Password, IsAdmin, IsOwner) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [Fname, Lname, DOB, Telephone, email, hashedPassword, 0, 0], (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).send('Server error');
@@ -67,6 +73,30 @@ app.post('/signup', (req, res) => {
       });
       
 });
+//Lookup route
+app.post('/lookup', (req, res) => {
+    const {lookupInput1 } = req.body;
+    console.log(lookupInput1);
+
+    // Check if the eagleaccount exists
+    db.query('SELECT * FROM eagleaccount WHERE email = ?', [lookupInput1], (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Server error');
+        }
+        if (result.length === 0) {
+            return document.getElementById('result').textContent = "User not found";
+        }
+
+        // Compare passwords
+        const user = result[0];
+        console.log(user.email);
+
+           
+        });
+    });
+
+
 
 // Login route
 app.post('/login', (req, res) => {
@@ -95,9 +125,9 @@ app.post('/login', (req, res) => {
 
             // Create session for the user
             req.session.userId = user.id;
-            if(user.IsOwner != null )
+            if(user.IsOwner === 1 )
                 res.sendFile(__dirname + '/MainpageOWN.html');
-            else if(user.IsAdmin != null)
+            else if(user.IsAdmin === 1)
                 res.sendFile(__dirname + '/MainpageEMP.html');
             else
             res.sendFile(__dirname + '/MainpageCUS.html');
@@ -111,6 +141,10 @@ app.get('/logout', (req, res) => {e
         res.send('Logged out successfully');
     });
 });
+
+app.get('./OwnerAcctMan', (req,res) => {
+    res.sendFile(__dirname + '/MainpageCUS.html');
+})
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
